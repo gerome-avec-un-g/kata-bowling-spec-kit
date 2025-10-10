@@ -1,44 +1,42 @@
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Bowling Score Calculator API
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `003-i-m-building` | **Date**: vendredi 10 octobre 2025 | **Spec**: ../../specs/003-i-m-building/spec.md
+**Input**: Feature specification from `/specs/003-i-m-building/spec.md`
 
 **Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+This plan outlines the implementation of a REST API that calculates the total score for a single line of American Ten-Pin Bowling, given a valid sequence of rolls. The API will be built using Java 21 and Spring Boot 3.5, utilizing an in-memory database for data persistence.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: Java 21  
+**Primary Dependencies**: Spring-Boot 3.5  
+**Storage**: In-memory database  
+**Testing**: jUnit  
+**Target Platform**: Server environment (e.g., Linux server)  
+**Project Type**: web  
+**Performance Goals**: Respond to score calculation requests within 100 milliseconds for 99% of requests under normal load; process 1000 score calculation requests per second without error.  
+**Constraints**: <100ms p99 response time  
+**Scale/Scope**: Single line of American Ten-Pin Bowling score calculation
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Language**: Java - **PASS** (Matches constitution)
+- **Framework**: Spring-Boot - **PASS** (Matches constitution)
+- **API**: RESTful services - **PASS** (Matches constitution)
+- **Data Persistence**: In-memory database - **VIOLATION** (Constitution specifies "Hibernate with Spring Data JPA")
+- **Testing**: jUnit - **PASS** (Matches constitution)
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-specs/[###-feature]/
+specs/003-i-m-building/
 ├── plan.md              # This file (/speckit.plan command output)
 ├── research.md          # Phase 0 output (/speckit.plan command)
 ├── data-model.md        # Phase 1 output (/speckit.plan command)
@@ -48,51 +46,30 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
 src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+├── main/
+│   ├── java/
+│   │   └── com/
+│   │       └── example/
+│   │           └── bowling/
+│   │               ├── model/
+│   │               ├── service/
+│   │               └── controller/
+│   └── resources/
+├── test/
+│   ├── java/
+│   │   └── com/
+│   │       └── example/
+│   │           └── bowling/
+│   │               ├── model/
+│   │               ├── service/
+│   │               └── controller/
+│   └── resources/
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: The project will follow a standard Spring Boot application structure, with `src/main/java` for source code and `src/test/java` for tests, organized by package (`com.example.bowling`). Within the `bowling` package, sub-packages for `model`, `service`, and `controller` will be used to align with Clean Architecture principles.
 
 ## Complexity Tracking
 
@@ -100,5 +77,4 @@ directories captured above]
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| Data Persistence: In-memory database vs. Hibernate with Spring Data JPA | For a simple kata, an in-memory database simplifies setup and development, allowing focus on the core scoring logic without the overhead of a full persistent database configuration. | Using Hibernate with Spring Data JPA would introduce unnecessary complexity for a stateless scoring API where data persistence beyond the request lifecycle is not required. |
