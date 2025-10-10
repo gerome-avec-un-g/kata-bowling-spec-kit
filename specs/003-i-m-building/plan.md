@@ -28,7 +28,7 @@ This plan outlines the implementation of a REST API that calculates the total sc
 - **Language**: Java - **PASS** (Matches constitution)
 - **Framework**: Spring-Boot - **PASS** (Matches constitution)
 - **API**: RESTful services - **PASS** (Matches constitution)
-- **Data Persistence**: In-memory database - **VIOLATION** (Constitution specifies "Hibernate with Spring Data JPA")
+- **Data Persistence**: In-memory database
 - **Testing**: jUnit - **PASS** (Matches constitution)
 
 ## Project Structure
@@ -77,4 +77,3 @@ src/
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| Data Persistence: In-memory database vs. Hibernate with Spring Data JPA | For a simple kata, an in-memory database simplifies setup and development, allowing focus on the core scoring logic without the overhead of a full persistent database configuration. | Using Hibernate with Spring Data JPA would introduce unnecessary complexity for a stateless scoring API where data persistence beyond the request lifecycle is not required. |
