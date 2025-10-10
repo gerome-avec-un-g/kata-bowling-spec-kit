@@ -1,15 +1,13 @@
 <!--
 Sync Impact Report:
-- Version change: None -> 1.0.0
-- Added sections:
-  - Core Principles
-  - Technology Stack
-  - Development Workflow
-  - Governance
+- Version change: 1.0.0 -> 1.1.0
+- Modified principles:
+  - Data Persistence (within Technology Stack)
+- Added sections: None
+- Removed sections: None
 - Templates requiring updates:
-  - C:\Users\parmentier.g\IdeaProjects\kata-bowling-spec-kit\.specify\templates\plan-template.md (⚠ pending): "Constitution Check" section needs to be filled. "Technical Context" can be pre-filled from the constitution.
-  - C:\Users\parmentier.g\IdeaProjects\kata-bowling-spec-kit\templates\tasks-template.md (⚠ pending): The template should be updated to reflect that tests are mandatory (TDD/BDD). Path conventions should be updated for a Spring Boot project.
-  - C:\Users\parmentier.g\IdeaProjects\kata-bowling-spec-kit\README.md (⚠ pending): Should be updated to include a reference to the constitution.
+  - C:\Users\parmentier.g\IdeaProjects\kata-bowling-spec-kit\.specify\templates\plan-template.md (⚠ pending): The "Constitution Check" section needs to be updated to reflect the new allowance for in-memory databases. While the check itself is dynamic, the template's example or guidance might need to be updated to reflect this flexibility.
+  - C:\Users\parmentier.g\IdeaProjects\kata-bowling-spec-kit\.specify\templates\tasks-template.md (⚠ pending): Similar to `plan-template.md`, the guidance or examples related to database setup might need to be adjusted to acknowledge in-memory options.
 - Follow-up TODOs: None
 -->
 # kata-bowling-spec-kit Constitution
@@ -41,7 +39,7 @@ The application will be built using the following technologies:
 - **Language**: Java
 - **Framework**: Spring-Boot
 - **API**: RESTful services
-- **Data Persistence**: Hibernate with Spring Data JPA
+- **Data Persistence**: Hibernate with Spring Data JPA (for persistent storage) or in-memory databases (for specific use cases like kata or testing)
 - **Testing**: jUnit
 
 ## Development Workflow
@@ -57,4 +55,4 @@ The development workflow will be centered around TDD and BDD.
 
 This constitution is the single source of truth for the development principles of this project. Any deviation must be justified and documented. All code reviews must ensure compliance with this constitution.
 
-**Version**: 1.0.0 | **Ratified**: 2025-10-10 | **Last Amended**: 2025-10-10
+**Version**: 1.1.0 | **Ratified**: 2025-10-10 | **Last Amended**: 2025-10-10
