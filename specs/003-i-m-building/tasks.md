@@ -20,9 +20,9 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create project structure per implementation plan (`src/main/java`, `src/test/java`, `com.example.bowling`, `model`, `service`, `controller` packages)
-- [ ] T002 Initialize Java 21 / Spring Boot 3.5 project with Maven dependencies (Spring Web, JUnit)
-- [ ] T003 [P] Configure linting and formatting tools (e.g., Checkstyle, Spotless)
+- [x] T001 Create project structure per implementation plan (`src/main/java`, `src/test/java`, `com.example.bowling`, `model`, `service`, `controller` packages)
+- [x] T002 Initialize Java 21 / Spring Boot 3.5 project with Maven dependencies (Spring Web, JUnit)
+- [x] T003 [P] Configure linting and formatting tools (e.g., Checkstyle, Spotless)
 
 ---
 
@@ -32,9 +32,9 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 Setup in-memory database configuration (e.g., H2 database for Spring Boot)
-- [ ] T005 Configure global error handling and logging infrastructure
-- [ ] T006 Create base `Roll` and `Frame` entities/classes (without full scoring logic yet)
+- [x] T004 Setup in-memory database configuration (e.g., H2 database for Spring Boot)
+- [x] T005 Configure global error handling and logging infrastructure
+- [x] T006 Create base `Roll` and `Frame` entities/classes (without full scoring logic yet)
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -50,17 +50,17 @@
 
 **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T007 [P] [US1] Write unit tests for `Roll` parsing and basic validation in `src/test/java/com/example/bowling/model/RollTest.java`
-- [ ] T008 [P] [US1] Write unit tests for `Frame` creation and basic scoring (e.g., open frames) in `src/test/java/com/example/bowling/model/FrameTest.java`
+- [x] T007 [P] [US1] Write unit tests for `Roll` parsing and basic validation in `src/test/java/com/example/bowling/model/RollTest.java`
+- [x] T008 [P] [US1] Write unit tests for `Frame` creation and basic scoring (e.g., open frames) in `src/test/java/com/example/bowling/model/FrameTest.java`
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] Implement `Roll` class in `src/main/java/com/example/bowling/model/Roll.java`
-- [ ] T010 [US1] Implement `Frame` class in `src/main/java/com/example/bowling/model/Frame.java`
-- [ ] T011 [US1] Implement `Game` class with perfect game scoring logic in `src/main/java/com/example/bowling/model/Game.java`
-- [ ] T012 [US1] Write integration test for `/score` endpoint with perfect game input in `src/test/java/com/example/bowling/controller/ScoreControllerIntegrationTest.java`
-- [ ] T013 [US1] Implement `ScoreService` with perfect game scoring logic in `src/main/java/com/example/bowling/service/ScoreService.java`
-- [ ] T014 [US1] Implement `ScoreController` with `/score` endpoint in `src/main/java/com/example/bowling/controller/ScoreController.java`
+- [x] T009 [US1] Implement `Roll` class in `src/main/java/com/example/bowling/model/Roll.java`
+- [x] T010 [US1] Implement `Frame` class in `src/main/java/com/example/bowling/model/Frame.java`
+- [x] T011 [US1] Implement `Game` class with perfect game scoring logic in `src/main/java/com/example/bowling/model/Game.java`
+- [x] T012 [US1] Write integration test for `/score` endpoint with perfect game input in `src/test/java/com/example/bowling/controller/ScoreControllerIntegrationTest.java`
+- [x] T013 [US1] Implement `ScoreService` with perfect game scoring logic in `src/main/java/com/example/bowling/service/ScoreService.java`
+- [x] T014 [US1] Implement `ScoreController` with `/score` endpoint in `src/main/java/com/example/bowling/controller/ScoreController.java`
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -74,13 +74,13 @@
 
 ### Tests for User Story 2
 
-- [ ] T015 [P] [US2] Write unit tests for `Game` class to cover spares and strikes in `src/test/java/com/example/bowling/model/GameTest.java`
+- [x] T015 [P] [US2] Write unit tests for `Game` class to cover spares and strikes in `src/test/java/com/example/bowling/model/GameTest.java`
 
 ### Implementation for User Story 2
 
-- [ ] T016 [US2] Update `Game` class to correctly calculate scores for spares and strikes in `src/main/java/com/example/bowling/model/Game.java`
-- [ ] T017 [US2] Update `ScoreService` to use the enhanced `Game` scoring logic in `src/main/java/com/example/bowling/service/ScoreService.java`
-- [ ] T018 [US2] Write integration test for `/score` endpoint with mixed game input in `src/test/java/com/example/bowling/controller/ScoreControllerIntegrationTest.java`
+- [x] T016 [US2] Update `Game` class to correctly calculate scores for spares and strikes in `src/main/java/com/example/bowling/model/Game.java`
+- [x] T017 [US2] Update `ScoreService` to use the enhanced `Game` scoring logic in `src/main/java/com/example/bowling/service/ScoreService.java`
+- [x] T018 [US2] Write integration test for `/score` endpoint with mixed game input in `src/test/java/com/example/bowling/controller/ScoreControllerIntegrationTest.java`
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
@@ -94,14 +94,14 @@
 
 ### Tests for User Story 3
 
-- [ ] T019 [P] [US3] Write unit tests for input validation in `ScoreServiceTest.java` (e.g., empty sequence, invalid characters, too many frames, invalid rolls per frame)
+- [x] T019 [P] [US3] Write unit tests for input validation in `ScoreServiceTest.java` (e.g., empty sequence, invalid characters, too many frames, invalid rolls per frame)
 
 ### Implementation for User Story 3
 
-- [ ] T020 [US3] Implement input validation logic in `ScoreService` to check for invalid or incomplete roll sequences in `src/main/java/com/example/bowling/service/ScoreService.java`
-- [ ] T021 [US3] Implement custom exception handling for invalid input in `src/main/java/com/example/bowling/exception/InvalidRollSequenceException.java`
-- [ ] T022 [US3] Update `ScoreController` to handle `InvalidRollSequenceException` and return appropriate HTTP 400 responses in `src/main/java/com/example/bowling/controller/ScoreController.java`
-- [ ] T023 [US3] Write integration tests for `/score` endpoint with invalid inputs in `src/test/java/com/example/bowling/controller/ScoreControllerIntegrationTest.java`
+- [x] T020 [US3] Implement input validation logic in `ScoreService` to check for invalid or incomplete roll sequences in `src/main/java/com/example/bowling/service/ScoreService.java`
+- [x] T021 [US3] Implement custom exception handling for invalid input in `src/main/java/com/example/bowling/exception/InvalidRollSequenceException.java`
+- [x] T022 [US3] Update `ScoreController` to handle `InvalidRollSequenceException` and return appropriate HTTP 400 responses in `src/main/java/com/example/bowling/controller/ScoreController.java`
+- [x] T023 [US3] Write integration tests for `/score` endpoint with invalid inputs in `src/test/java/com/example/bowling/controller/ScoreControllerIntegrationTest.java`
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -111,7 +111,7 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T024 Run quickstart.md validation
+- [x] T024 Run quickstart.md validation
 - [ ] T025 Code cleanup and refactoring
 - [ ] T026 Update `README.md` with API usage instructions and link to `quickstart.md`
 
