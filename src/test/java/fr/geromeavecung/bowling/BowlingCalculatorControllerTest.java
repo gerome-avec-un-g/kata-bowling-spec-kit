@@ -3,6 +3,8 @@ package fr.geromeavecung.bowling;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -27,22 +29,23 @@ class BowlingCalculatorControllerTest {
     @MockitoBean
     private BowlingCalculator bowlingCalculator;
 
-    @Test
-    void compute_score() throws Exception {
-        when(bowlingCalculator.compute(new Frames("0 0 0 0 0 0 0 0 0 0"))).thenReturn(0);
+    @ParameterizedTest
+    @CsvSource({"0 0 0 0 0 0 0 0 0 0,0", "0 0 0 0 0 0 0 0 0 1,1"})
+    void compute_score(String frames, String score) throws Exception {
+        when(bowlingCalculator.compute(new Frames(frames))).thenReturn(Integer.parseInt(score));
 
         mockMvc.perform(post("/api/bowling/calculate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
-                                    "frames": "0 0 0 0 0 0 0 0 0 0"
-                                }"""))
+                                    "frames": "%s"
+                                }""".formatted(frames)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
-                            "score": 0
-                        }"""));
+                            "score": %s
+                        }""".formatted(score)));
 
     }
 
