@@ -10,9 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/bowling/calculate")
 public class BowlingCalculatorController {
 
+    private final BowlingCalculator bowlingCalculator;
+
+    public BowlingCalculatorController(BowlingCalculator bowlingCalculator) {
+        this.bowlingCalculator = bowlingCalculator;
+    }
+
     @PostMapping
     public ResponseEntity<ScoreCalculationResponse> createAnAuthor(@RequestBody ScoreCalculationRequest request) {
-        return ResponseEntity.ok(new ScoreCalculationResponse(0));
+        int score = bowlingCalculator.compute(new Frames(request.frames()));
+        return ResponseEntity.ok(new ScoreCalculationResponse(score));
     }
 
 }
