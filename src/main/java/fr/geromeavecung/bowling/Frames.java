@@ -35,6 +35,16 @@ public record Frames(List<Frame> value) {
                     frameScore += nextFrame.totalDownedPins();
                 }
             }
+            if (frame.type() == FrameType.STRIKE) {
+                if (i + 1 < value.size()) {
+                    Frame nextFrame = value.get(i + 1);
+                    frameScore += nextFrame.totalDownedPins();
+                }
+                if (i + 2 < value.size()) {
+                    Frame nextFrame = value.get(i + 2);
+                    frameScore += nextFrame.totalDownedPins();
+                }
+            }
             scores.add(frameScore);
         }
         System.out.println(scores);
