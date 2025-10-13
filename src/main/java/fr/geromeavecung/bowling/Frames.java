@@ -26,6 +26,7 @@ public record Frames(List<Frame> value) {
             }
             scores.add(frameScore);
         }
+        System.out.println(scores);
         return scores.stream().mapToInt(score -> score).sum();
     }
 }

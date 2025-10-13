@@ -6,6 +6,4 @@ public enum FrameType {
     SPARE,
     STRIKE;
 
-
-
 }
