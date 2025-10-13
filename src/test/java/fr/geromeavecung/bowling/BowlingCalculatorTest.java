@@ -68,7 +68,9 @@ class BowlingCalculatorTest {
 
     @ParameterizedTest
     @CsvSource({
-            "00 00 00 00 00 00 00 00 00 0-,spare on frame 10 requires one bonus roll",
+            "00 00 00 00 00 00 00 00 00,minimum number of frames is 10",
+            "00 00 00 00 00 00 00 00 00 0-,spare on frame 10 requires 11 frames",
+            "00 00 00 00 00 00 00 00 00 0- 00 00,spare on frame 10 requires 11 frames",
     })
     void compute_score_errors(String frames, String expectedErrorMessage) {
         BowlingCalculator bowlingCalculator = new BowlingCalculator();
