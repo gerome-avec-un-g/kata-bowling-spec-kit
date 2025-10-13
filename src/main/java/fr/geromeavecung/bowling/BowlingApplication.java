@@ -1,13 +1,13 @@
-package com.example.bowling;
+package fr.geromeavecung.bowling;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BowlingScoreCalculatorApplication {
+public class BowlingApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BowlingScoreCalculatorApplication.class, args);
+        SpringApplication.run(BowlingApplication.class, args);
     }
 
 }
