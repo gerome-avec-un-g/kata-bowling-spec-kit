@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BowlingCalculator {
     public int compute(Frames frames) {
-        if(frames.value().startsWith("1")) {
+        if(frames.value().contains("1")) {
             return 1;
         }
         return 0;

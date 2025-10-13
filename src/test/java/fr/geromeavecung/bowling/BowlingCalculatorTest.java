@@ -1,6 +1,8 @@
 package fr.geromeavecung.bowling;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,10 +15,11 @@ class BowlingCalculatorTest {
         assertThat(score).isZero();
     }
 
-    @Test
-    void compute_score_1() {
+    @ParameterizedTest
+    @ValueSource(strings = {"1 0 0 0 0 0 0 0 0 0", "0 1 0 0 0 0 0 0 0 0"})
+    void compute_score_1(String frames) {
         BowlingCalculator bowlingCalculator = new BowlingCalculator();
-        int score = bowlingCalculator.compute(new Frames("1 0 0 0 0 0 0 0 0 0"));
+        int score = bowlingCalculator.compute(new Frames(frames));
         assertThat(score).isOne();
     }
 
