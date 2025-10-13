@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -17,15 +19,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = {BowlingCalculatorController.class})
 @WebMvcTest
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-public class BowlingCalculatorControllerTest {
+class BowlingCalculatorControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    void create_an_author() throws Exception {
+    @MockitoBean
+    private BowlingCalculator bowlingCalculator;
 
-        mockMvc.perform(post("/api/authors")
+    @Test
+    void compute_score() throws Exception {
+        when(bowlingCalculator.compute(new Frames("0 0 0 0 0 0 0 0 0 0"))).thenReturn(0);
+
+        mockMvc.perform(post("/api/bowling/calculate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -35,7 +41,7 @@ public class BowlingCalculatorControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         {
-                            "score": "0"
+                            "score": 0
                         }"""));
 
     }
