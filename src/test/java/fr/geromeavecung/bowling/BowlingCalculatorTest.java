@@ -13,4 +13,13 @@ class BowlingCalculatorTest {
         assertThat(score).isZero();
     }
 
+    @Test
+    void compute_score_1() {
+        BowlingCalculator bowlingCalculator = new BowlingCalculator();
+        int score = bowlingCalculator.compute(new Frames("1 0 0 0 0 0 0 0 0 0"));
+        assertThat(score).isOne();
+    }
+
+    // ten frames + 3 bonus
+
 }
