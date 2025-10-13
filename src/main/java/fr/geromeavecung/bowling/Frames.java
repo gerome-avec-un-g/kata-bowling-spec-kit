@@ -26,7 +26,7 @@ public record Frames(List<Frame> value) {
 
     public int computeScore() {
         List<Integer> scores = new ArrayList<>();
-        for (int i = 0; i < value.size(); i++) {
+        for (int i = 0; i < 10; i++) {
             Frame frame = value.get(i);
             int frameScore = frame.totalDownedPins();
             if (frame.type() == FrameType.SPARE) {

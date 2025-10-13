@@ -63,8 +63,8 @@ class BowlingCalculatorTest {
             "0- 0- 00 00 00 00 00 00 00 00,30",
             "0- 0- 10 00 00 00 00 00 00 00,32",
             "0- x 00 00 00 00 00 00 00 00,30",
-            "00 00 00 00 00 00 00 00 00 0- 10,12",
-            "00 00 00 00 00 00 00 00 00 0- 0-,30",
+            "00 00 00 00 00 00 00 00 00 0- 10,11",
+            "00 00 00 00 00 00 00 00 00 0- 0-,20",
     })
     void compute_score_spare(String frames, String expectedScore) {
         BowlingCalculator bowlingCalculator = new BowlingCalculator();
@@ -83,6 +83,7 @@ class BowlingCalculatorTest {
             "x 11 10 10 00 00 00 00 00 00,17",
             "x x 00 00 00 00 00 00 00 00,30",
             "x x x 00 00 00 00 00 00 00,60",
+            "x x x x x x x x x x x x,300",
 //            "00 00 00 00 00 00 00 00 00 0- 10,12",
 //            "00 00 00 00 00 00 00 00 00 0- 0-,30",
     })
