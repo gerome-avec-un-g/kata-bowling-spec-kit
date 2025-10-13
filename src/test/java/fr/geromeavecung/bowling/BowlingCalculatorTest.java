@@ -49,7 +49,11 @@ class BowlingCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"0- 00 00 00 00 00 00 00 00 00,10"})
+    @CsvSource({
+            "0- 00 00 00 00 00 00 00 00 00,10",
+            "00 0- 00 00 00 00 00 00 00 00,10",
+            "0- 01 00 00 00 00 00 00 00 00,12"
+    })
     void compute_score_spare(String frames, String expectedScore) {
         BowlingCalculator bowlingCalculator = new BowlingCalculator();
         int score = bowlingCalculator.compute(new Frames(frames));
