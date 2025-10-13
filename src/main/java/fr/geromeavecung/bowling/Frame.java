@@ -10,6 +10,12 @@ public record Frame(int roll1, int roll2, FrameType type) {
         );
     }
 
+    public Frame {
+        if (type != FrameType.SPARE && (roll1 + roll2) > 9) {
+            throw new IllegalArgumentException("sum of roll equal or superior to 10 is not allowed. use spare instead");
+        }
+    }
+
     private static int computeRoll1(String frameAsString) {
         if (frameAsString.contains("-")) {
             return 0;

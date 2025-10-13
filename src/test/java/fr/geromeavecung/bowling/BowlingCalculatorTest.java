@@ -42,7 +42,10 @@ class BowlingCalculatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"01 01 01 01 01 01 01 01 01 01,10"})
+    @CsvSource({
+            "01 01 01 01 01 01 01 01 01 01,10",
+            "45 00 00 00 00 00 00 00 00 00,9", // maximum sum without spare
+    })
     void compute_score_sum_of_all_frames(String frames, String expectedScore) {
         BowlingCalculator bowlingCalculator = new BowlingCalculator();
         int score = bowlingCalculator.compute(new Frames(frames));
@@ -69,6 +72,7 @@ class BowlingCalculatorTest {
     @ParameterizedTest
     @CsvSource({
             "00 00 00 00 00 00 00 00 00,minimum number of frames is 10",
+            "55 00 00 00 00 00 00 00 00 00,sum of roll equal or superior to 10 is not allowed. use spare instead",
             "00 00 00 00 00 00 00 00 00 0-,spare on frame 10 requires 11 frames",
             "00 00 00 00 00 00 00 00 00 0- 00 00,spare on frame 10 requires 11 frames",
     })
