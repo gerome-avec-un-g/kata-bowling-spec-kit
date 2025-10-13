@@ -48,6 +48,14 @@ class BowlingCalculatorTest {
         assertThat(score).isEqualTo(Integer.parseInt(expectedScore));
     }
 
+    @ParameterizedTest
+    @CsvSource({"0- 00 00 00 00 00 00 00 00 00,10"})
+    void compute_score_spare(String frames, String expectedScore) {
+        BowlingCalculator bowlingCalculator = new BowlingCalculator();
+        int score = bowlingCalculator.compute(new Frames(frames));
+        assertThat(score).isEqualTo(Integer.parseInt(expectedScore));
+    }
+
     // ten frames + 3 bonus
     // The maximum score is 300, achieved by getting twelve strikes in a row
 
