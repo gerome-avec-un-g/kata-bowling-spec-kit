@@ -23,6 +23,14 @@ class BowlingCalculatorTest {
         assertThat(score).isOne();
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"2 0 0 0 0 0 0 0 0 0", "0 2 0 0 0 0 0 0 0 0", "1 1 0 0 0 0 0 0 0 0"})
+    void compute_score_2(String frames) {
+        BowlingCalculator bowlingCalculator = new BowlingCalculator();
+        int score = bowlingCalculator.compute(new Frames(frames));
+        assertThat(score).isEqualTo(2);
+    }
+
     // ten frames + 3 bonus
 
 }
