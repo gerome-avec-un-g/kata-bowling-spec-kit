@@ -30,7 +30,7 @@ class BowlingCalculatorControllerTest {
     private BowlingCalculator bowlingCalculator;
 
     @ParameterizedTest
-    @CsvSource({"0 0 0 0 0 0 0 0 0 0,0", "0 0 0 0 0 0 0 0 0 1,1"})
+    @CsvSource({"00 00 00 00 00 00 00 00 00 00,0", "00 00 00 00 00 00 00 00 00 10,1"})
     void compute_score(String frames, String score) throws Exception {
         when(bowlingCalculator.compute(new Frames(frames))).thenReturn(Integer.parseInt(score));
 
