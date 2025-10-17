@@ -9,8 +9,8 @@ public class Frames {
 
     public Frames(String input) {
         if (input == null) throw new IllegalArgumentException("Input cannot be null");
-        // normalize common variations: lowercase x, 0 as '-', allow '|' or ',' as separators
-        String normalized = input.trim().replace('x', 'X').replace('|', ' ').replace(',', ' ').replace('0', '-');
+        // normalize common variations: uppercase everything, allow '|' or ',' as separators, treat 'F' (foul) as '-'
+        String normalized = input.trim().toUpperCase().replace('|', ' ').replace(',', ' ').replace('F', '-');
         String[] tokens = normalized.split("\\s+");
         if (tokens.length == 0) throw new IllegalArgumentException("Empty input");
 
@@ -43,7 +43,7 @@ public class Frames {
 
     private Frame parseNormalFrame(String token) {
         if (token == null || token.isEmpty()) throw new IllegalArgumentException("Empty frame token");
-        if (token.equals("X")) {
+        if (token.equals("X") || token.equals("10")) {
             return new Frame(10, 0, FrameType.STRIKE);
         }
         if (token.length() == 1 && token.equals("-")) {
@@ -74,19 +74,30 @@ public class Frames {
     private Frame parseTenthFrame(String token) {
         if (token == null || token.isEmpty()) throw new IllegalArgumentException("Empty tenth frame token");
         List<Integer> rolls = new ArrayList<>();
-        for (int i = 0; i < token.length(); i++) {
+        int i = 0;
+        while (i < token.length()) {
             char c = token.charAt(i);
             if (c == 'X') {
                 rolls.add(10);
+                i++;
             } else if (c == '-') {
                 rolls.add(0);
+                i++;
             } else if (c == '/') {
                 if (rolls.isEmpty()) throw new IllegalArgumentException("Spare without previous roll");
                 int last = rolls.get(rolls.size()-1);
                 if (last < 0 || last > 10) throw new IllegalArgumentException("Invalid previous roll for spare");
                 rolls.add(10 - last);
+                i++;
             } else if (Character.isDigit(c)) {
-                rolls.add(Character.getNumericValue(c));
+                // support multi-digit '10'
+                if (c == '1' && i+1 < token.length() && token.charAt(i+1) == '0') {
+                    rolls.add(10);
+                    i += 2;
+                } else {
+                    rolls.add(Character.getNumericValue(c));
+                    i++;
+                }
             } else {
                 throw new IllegalArgumentException("Invalid character in tenth frame: " + c);
             }
