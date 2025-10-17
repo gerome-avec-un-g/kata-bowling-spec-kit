@@ -134,7 +134,8 @@ public class CompleteBowlingCalculatorTest {
 
     @Test
     public void shouldThrowOnInvalidFrameSum() throws Exception {
-        assertThrows(IllegalArgumentException.class, () -> new Frames("7 5 - - - - - - - -"));
+        // use a single token '75' which represents a frame with sum 7+5 = 12 (>10) and must be rejected
+        assertThrows(IllegalArgumentException.class, () -> new Frames("75 - - - - - - - - -"));
     }
 
     @Test

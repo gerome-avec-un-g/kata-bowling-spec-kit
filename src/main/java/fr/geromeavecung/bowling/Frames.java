@@ -9,7 +9,9 @@ public class Frames {
 
     public Frames(String input) {
         if (input == null) throw new IllegalArgumentException("Input cannot be null");
-        String[] tokens = input.trim().split("\\s+");
+        // normalize common variations: lowercase x, 0 as '-', allow '|' or ',' as separators
+        String normalized = input.trim().replace('x', 'X').replace('|', ' ').replace(',', ' ').replace('0', '-');
+        String[] tokens = normalized.split("\\s+");
         if (tokens.length == 0) throw new IllegalArgumentException("Empty input");
 
         List<Frame> parsed = new ArrayList<>();
@@ -29,7 +31,7 @@ public class Frames {
         StringBuilder sb = new StringBuilder();
         for (int i = idx; i < tokens.length; i++) sb.append(tokens[i]);
         String tenthToken = sb.toString();
-        // allow a single '-' to mean two zeros for the tenth frame (tests frequently use '-' per frame)
+        // allow a single '-' to mean two zeros for the tenth frame
         if ("-".equals(tenthToken)) tenthToken = "--";
         Frame tenth = parseTenthFrame(tenthToken);
         parsed.add(tenth);
@@ -46,6 +48,10 @@ public class Frames {
         }
         if (token.length() == 1 && token.equals("-")) {
             return new Frame(0, 0, FrameType.DEFAULT);
+        }
+        if (token.length() == 1 && Character.isDigit(token.charAt(0))) {
+            int r1 = charToPins(token.charAt(0));
+            return new Frame(r1, 0, FrameType.DEFAULT);
         }
         if (token.length() == 2) {
             char c1 = token.charAt(0);
