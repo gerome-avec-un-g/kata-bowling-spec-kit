@@ -32,7 +32,11 @@ public record Frames(List<Frame> value) {
             if (frame.type() == FrameType.SPARE) {
                 if (i + 1 < value.size()) {
                     Frame nextFrame = value.get(i + 1);
-                    frameScore += nextFrame.totalDownedPins();
+                    if (nextFrame.type()==FrameType.STRIKE) {
+                        frameScore += 10;
+                    } else {
+                        frameScore += nextFrame.roll1();
+                    }
                 }
             }
             if (frame.type() == FrameType.STRIKE) {

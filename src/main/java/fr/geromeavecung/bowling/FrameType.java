@@ -2,7 +2,7 @@ package fr.geromeavecung.bowling;
 
 public enum FrameType {
 
-    DEFAULT,
+    DEFAULT,//OPEN ?
     SPARE,
     STRIKE;
 

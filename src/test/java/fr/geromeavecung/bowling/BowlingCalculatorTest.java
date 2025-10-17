@@ -56,15 +56,15 @@ class BowlingCalculatorTest {
     @CsvSource({
             "0- 00 00 00 00 00 00 00 00 00,10",
             "00 0- 00 00 00 00 00 00 00 00,10",
-            "0- 01 00 00 00 00 00 00 00 00,12",
             "0- 10 00 00 00 00 00 00 00 00,12",
-            "0- 11 00 00 00 00 00 00 00 00,14",
-            "0- 11 10 00 00 00 00 00 00 00,15",
-            "0- 0- 00 00 00 00 00 00 00 00,30",
-            "0- 0- 10 00 00 00 00 00 00 00,32",
+            "0- 01 00 00 00 00 00 00 00 00,11",//spare only count next roll not next frame
+            "0- 11 00 00 00 00 00 00 00 00,13",
+            "0- 11 10 00 00 00 00 00 00 00,14",
+            "0- 0- 00 00 00 00 00 00 00 00,20",
+            "0- 0- 10 00 00 00 00 00 00 00,22",
             "0- x 00 00 00 00 00 00 00 00,30",
-            "00 00 00 00 00 00 00 00 00 0- 10,11",
-            "00 00 00 00 00 00 00 00 00 0- 0-,20",
+            "00 00 00 00 00 00 00 00 00 0- 10,11",//FIXME
+            "00 00 00 00 00 00 00 00 00 0- 0-,10",//FIXME
     })
     void compute_score_spare(String frames, String expectedScore) {
         BowlingCalculator bowlingCalculator = new BowlingCalculator();
@@ -105,6 +105,11 @@ class BowlingCalculatorTest {
         assertThatThrownBy(() -> bowlingCalculator.compute(new Frames(frames)))
                 .hasMessage(expectedErrorMessage);
     }
+
+    // FIXME 10th frame is 2 or 3 rolls (not frames)
+    // 45
+    // 4-9
+    // xxx
 
     // errors : strange characters
     // ten frames + 2 bonus
